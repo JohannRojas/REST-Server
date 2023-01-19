@@ -1,50 +1,54 @@
 const express = require('express')
+const cors = require('cors')
 
 class Server {
-  constructor() {
-    this.app = express();
-    this.port = process.env.PORT;
+  constructor () {
+    this.app = express()
+    this.port = process.env.PORT
 
-    //Midelewares
-    this.midelewares();
+    // Midelewares
+    this.midelewares()
 
-    //Routes
-    this.routes();
+    // Routes
+    this.routes()
   }
 
-  midelewares() {
-    //Public directory
-    this.app.use(express.static('public'));
+  midelewares () {
+    // CORS
+    this.app.use(cors())
+
+    // Public directory
+    this.app.use(express.static('public'))
   }
 
-  routes() {
+  routes () {
     this.app.get('/api', (req, res) => {
       res.json({
         msg: 'get API'
-      });
+      })
     })
     this.app.put('/api', (req, res) => {
       res.json({
         msg: 'put API'
-      });
+      })
     })
     this.app.post('/api', (req, res) => {
       res.json({
         msg: 'post API'
-      });
+      })
     })
     this.app.delete('/api', (req, res) => {
       res.json({
         msg: 'delete API'
-      });
+      })
     })
   }
 
-  listen() {
+  listen () {
     this.app.listen(this.port, () => {
-      console.log('Server running on port ', process.env.PORT);
+      console.log('Server running on port ', process.env.PORT)
     })
   }
 }
 
-module.exports = Server;
+module.exports = Server
